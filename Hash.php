@@ -3,7 +3,7 @@
 class Hash {
     
     public static $clients   = array(
-        '12345' => '6429f859f57f376086a3c22eb20015ce',
+        'A_CLIENT' => 'CLIENT_SECRET_KEY',
     );
     public static $algorithm = 'sha256';
     public static $timeout   = 120; // second
