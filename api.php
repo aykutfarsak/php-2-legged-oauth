@@ -1,30 +1,47 @@
 <?php
 
-require 'Hash.php';
+use Symfony\Component\HttpFoundation\Request;
 
-$inputData = $_REQUEST;
-$payload   = array();
-
-header('Content-Type: application/json');
-
-try {
+$before = function (Request $request) use ($app) {
     
-    if ( !isset($inputData['hash']) ) {
-        throw new Exception('Missing argument: hash');
-    }
-
-    if ( !Hash::check($inputData, $inputData['hash']) ) {
-        throw new Exception('Invalid hash');
+    $all  = array_merge($request->query->all(), $request->request->all());
+    $hash = isset($all['hash']) ? $all['hash'] : false;
+    
+    if ( !$hash ) {
+        return $app->json(array('success' => false, 'error' => 'Missing argument: hash'), 500);
     }
     
-    // response body..
+    if ( !Hash::check($all, $hash) ) {
+        return $app->json(array('success' => false, 'error' => 'Invalid hash'), 500);
+    }
+};
+
+$app->post('/api/user', function () use ($app) {
     
-    $payload['success'] = true;
+    // ..
+    
+    $payload = array(
+        'success'  => true,
+        'user_id'  => 1
+    );
+    
+    return $app->json($payload);
+    
+})->before($before);
 
-} catch (Exception $e) {
-    $payload['success'] = false;
-    $payload['error']   = $e->getMessage(); 
-}
-
-echo json_encode($payload);
-
+$app->get('/api/user/{id}', function ($id) use ($app) {
+    
+    // ..
+    
+    $user = array(
+        'success' => true,
+        'user'    => array(
+            'id'      => $id,
+            'name'    => 'Aykut Farsak',
+            'email'   => 'aykutfarsak@gmail.com'
+        )
+    );
+    
+    return $app->json($user);
+    
+})->before($before);

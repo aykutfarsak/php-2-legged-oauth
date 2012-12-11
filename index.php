@@ -1,20 +1,33 @@
 <?php
 
-require 'Hash.php';
-require 'ApiRequest.php';
+require_once 'config.php';
+require_once 'api.php';
 
-$api = new ApiRequest();
-$api->setClientId('YOUR_CLIENT_ID')
-    ->setSecretKey('YOUR_SECRET_KEY')
-    ->setEndPoint('YOUR_API_ENDPOINT');
+$app->get('/', function () {
 
-$response = $api->make('user/1');
-// or
-$response = $api->make('user', 'POST', array(
-    'name'     => 'Aykut',
-    'email'    => 'aykutfarsak@gmail.com',
-    'password' => 's3cr3t'
-));
+    $api = new ApiRequest();
+    $api->setClientId('A_CLIENT')
+        ->setSecretKey('CLIENT_SECRET_KEY')
+        ->setEndPoint('http://localhost/2leggedoauth/api/');
 
-echo '<pre>';
-var_dump($response);
+    $response1 = $api->make('user/1');
+    
+    echo '<pre>';
+    var_dump($response1);
+    echo '</pre>';
+    
+    // or
+    $response2 = $api->make('user', 'POST', array(
+        'name'     => 'Aykut',
+        'email'    => 'aykutfarsak@gmail.com',
+        'password' => 's3cr3t'
+    ));
+
+    echo '<pre>';
+    var_dump($response2);
+    echo '</pre>';
+    
+    return '';
+});
+
+$app->run();
