@@ -1,7 +1,9 @@
-# OS or Editor folders
 .DS_Store
 .project
 .settings
 .tmproj
 *.esproj
 nbproject
+vendor
+composer.phar
+composer.lock
