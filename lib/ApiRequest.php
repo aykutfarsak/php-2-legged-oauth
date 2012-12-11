@@ -32,7 +32,7 @@ class ApiRequest {
     protected function getParams($uri, $data = array()) {
 
         if (!empty($data)) {
-            foreach (array('uri', 'client_id', 'time') as $arg) {
+            foreach (array('uri', 'client_id', 'time', 'hash') as $arg) {
                 if (array_key_exists($arg, $data)) {
                     throw new Exception("You can't use '$arg' parameter, it is reserved");
                 }
