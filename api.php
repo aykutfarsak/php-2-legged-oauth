@@ -5,7 +5,7 @@ use Symfony\Component\HttpFoundation\Request;
 $before = function (Request $request) use ($app) {
     
     $all  = array_merge($request->query->all(), $request->request->all());
-    $hash = isset($all['hash']) ? $all['hash'] : false;
+    $hash = $request->get('hash');
     
     if ( !$hash ) {
         return $app->json(array('success' => false, 'error' => 'Missing argument: hash'), 500);
