@@ -2,20 +2,28 @@
 
 use Symfony\Component\HttpFoundation\Request;
 
-$before = function (Request $request) use ($app) {
+// before middleware
+$hashValidation = function (Request $request) use ($app) {
     
-    $all  = array_merge($request->query->all(), $request->request->all());
-    $hash = $request->get('hash');
+    $allInputs = array_merge($request->query->all(), $request->request->all());
+    $hash      = $request->get('hash');
     
-    if ( !$hash ) {
-        return $app->json(array('success' => false, 'error' => 'Missing argument: hash'), 500);
-    }
+    try {
     
-    if ( !Hash::check($all, $hash) ) {
-        return $app->json(array('success' => false, 'error' => 'Invalid hash'), 500);
+        if ( !$hash ) {
+            throw new Exception('Missing argument: hash');
+        }
+        
+        if ( !Hash::check($allInputs, $hash) ) {
+            throw new Exception('Invalid hash');
+        }
+    
+    } catch (Exception $e) {
+        return $app->json(array('success' => false, 'error' => $e->getMessage()), 500);
     }
 };
 
+// save a user
 $app->post('/api/user', function () use ($app) {
     
     // ..
@@ -27,8 +35,9 @@ $app->post('/api/user', function () use ($app) {
     
     return $app->json($payload);
     
-})->before($before);
+})->before($hashValidation);
 
+// get a user info
 $app->get('/api/user/{id}', function ($id) use ($app) {
     
     // ..
@@ -44,4 +53,4 @@ $app->get('/api/user/{id}', function ($id) use ($app) {
     
     return $app->json($user);
     
-})->before($before);
+})->before($hashValidation);
