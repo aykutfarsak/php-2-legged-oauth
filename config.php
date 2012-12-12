@@ -7,6 +7,11 @@ require_once $path . 'vendor/autoload.php';
 require_once 'lib/Hash.php';
 require_once 'lib/ApiRequest.php';
 
-// silex
+// Silex
 $app = new Silex\Application();
 $app['debug'] = true;
+
+// API Clients
+Hash::$clients = array(
+    'A_CLIENT' => 'CLIENT_SECRET_KEY',
+);
