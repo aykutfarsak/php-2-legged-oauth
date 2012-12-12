@@ -78,7 +78,7 @@ class Hash {
         $currentTime       = strtotime(gmdate('d.m.Y H:i:s'));
         
         if ( $currentTime > ($inputData['time'] + self::$timeout) ) {
-            throw new HashException("Request timeout (current timestamp is $currentTime, request time is ".$inputData['time']);
+            throw new HashException("Request timeout (server time: $currentTime, request time: ".$inputData['time']);
         }
         
         // get secret from client_id
