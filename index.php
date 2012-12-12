@@ -8,7 +8,7 @@ $app->get('/', function () {
     $api = new ApiRequest();
     $api->setClientId('A_CLIENT')
         ->setSecretKey('CLIENT_SECRET_KEY')
-        ->setEndPoint('http://localhost/2leggedoauth/api/');
+        ->setEndpointUrl('http://localhost/2leggedoauth/api/');
 
     $response1 = $api->make('user/1');
     

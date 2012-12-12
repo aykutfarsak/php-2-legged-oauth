@@ -12,6 +12,6 @@ $app = new Silex\Application();
 $app['debug'] = true;
 
 // API Clients
-Hash::$clients = array(
+Hash::setClients(array(
     'A_CLIENT' => 'CLIENT_SECRET_KEY',
-);
+));
