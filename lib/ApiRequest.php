@@ -37,6 +37,15 @@ class ApiRequest {
     }
     
     /**
+     * Get client id
+     * 
+     * @return mixed
+     */
+    public function getClientId() {
+        return $this->clientId;
+    }
+        
+    /**
      * Set secret key
      * 
      * @param string $key
@@ -48,6 +57,15 @@ class ApiRequest {
     }
     
     /**
+     * Get secret key
+     * 
+     * @return string
+     */
+    public function getSecretKey() {
+        return $this->secretKey;
+    }
+    
+    /**
      * Set API endpoint URL
      * 
      * @param string $url
@@ -56,6 +74,15 @@ class ApiRequest {
     public function setEndpointUrl($url) {
         $this->endPoint = $url;
         return $this;
+    }
+    
+    /**
+     * Get API endpoint URL
+     * 
+     * @return string
+     */
+    public function getEndPoint() {
+        return $this->endPoint;
     }
 
     /**
@@ -82,7 +109,7 @@ class ApiRequest {
      * @return array
      * @throws ApiRequestException
      */
-    protected function getParams($uri, $data = array()) {
+    public function getParams($uri, $data = array()) {
 
         // check for reserved keys
         if (!empty($data)) {

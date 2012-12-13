@@ -1,5 +1,7 @@
 Example implementation of 2-legged OAuth with [Silex](http://silex.sensiolabs.org/) (Inspired from [Designing a Secure REST (Web) API without OAuth](http://www.thebuzzmedia.com/designing-a-secure-rest-api-without-oauth-authentication/))
 
+[![Build Status](https://secure.travis-ci.org/aykutfarsak/php-2-legged-oauth.png)](http://travis-ci.org/aykutfarsak/php-2-legged-oauth)
+
 ### Installation ###
 
 With [Composer](http://getcomposer.org/), install all dependencies.
